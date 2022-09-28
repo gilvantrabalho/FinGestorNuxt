@@ -7,12 +7,12 @@
 
         <CardContainer v-slot:body>
 
-            <div class="mb-4 bg-light p-3">
-                <h4>Adicionar nova Transação</h4>
-            </div>
-
             <div class="row">
                 <div class="col-md-4">
+
+                    <div class="mb-4 bg-light p-3">
+                        <h5>Adicionar nova Transação</h5>
+                    </div>
 
                     <form @submit.prevent="submit" class="mt-3" method="post">
 
@@ -33,6 +33,10 @@
 
                 </div>
                 <div class="col-md-8 ps-4">
+
+                    <div class="mb-4 bg-light p-3">
+                        <h5>Transação adicionadas hoje</h5>
+                    </div>
 
                     <div v-if="statusDelete" class="alert alert-warning shadow" role="alert">
                         <span>Deseja mesmo excluir esse item?</span>
@@ -105,13 +109,13 @@
 </style>
 
 <script>
-import CardContainer from '../../components/cards/CardContainer.vue';
-import InputComponent from '../../components/forms/input/InputComponent.vue';
-import TextAreaComponent from '../../components/forms/textarea/TextAreaComponent.vue';
-import Button from '../../components/buttons/Button.vue';
-import FormErrors from '../../components/messages/FormErrors.vue';
-import Spinner from '../../components/spinners/Spinner.vue';
-import Modal from '../../components/modals/Modal.vue';
+import CardContainer from '../../../components/cards/CardContainer.vue';
+import InputComponent from '../../../components/forms/input/InputComponent.vue';
+import TextAreaComponent from '../../../components/forms/textarea/TextAreaComponent.vue';
+import Button from '../../../components/buttons/Button.vue';
+import FormErrors from '../../../components/messages/FormErrors.vue';
+import Spinner from '../../../components/spinners/Spinner.vue';
+import Modal from '../../../components/modals/Modal.vue';
 export default {
     components: { CardContainer, InputComponent, TextAreaComponent, Button, FormErrors, Spinner, Modal },
     data() {
@@ -203,26 +207,26 @@ export default {
             console.log(this.idSelected, this.indexSelected)
 
             this.$axios.delete(`transaction/delete/${this.idSelected}`)
-            .then(res => {
-                console.log(!res.data.error)
-                if (!res.data.error) {
-                    console.log(res.data.response)
-                    this.transactions.splice(this.indexSelected, 1)
-                    this.statusDelete = false;
-                    this.$notify.success({
-                                title: 'Sucesso!',
-                                message: res.data.response.message
-                            });
-                } else {
-                    this.$notify.error('Oops.', res.data.response.message);
-                }
-            })
-            .catch(error => {
+                .then(res => {
+                    console.log(!res.data.error)
+                    if (!res.data.error) {
+                        console.log(res.data.response)
+                        this.transactions.splice(this.indexSelected, 1)
+                        this.statusDelete = false;
+                        this.$notify.success({
+                            title: 'Sucesso!',
+                            message: res.data.response.message
+                        });
+                    } else {
+                        this.$notify.error('Oops.', res.data.response.message);
+                    }
+                })
+                .catch(error => {
 
-            })
-            .then(() => {
+                })
+                .then(() => {
 
-            })
+                })
         }
     }
 }

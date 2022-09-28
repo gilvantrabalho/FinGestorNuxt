@@ -14,6 +14,7 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css' },
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' }
     ]
   },
 
@@ -24,7 +25,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/bootstrap.min.js', mode: 'client' },
-    { src: '~/plugins/main.js', mode: 'client' }
+    { src: '~/plugins/main.js', mode: 'client' },
+    { src: '~/plugins/vue-good-table', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

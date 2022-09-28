@@ -11,7 +11,30 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <NuxtLink to="/" class="active nav-link">Home</NuxtLink>
-                        <NuxtLink to="/transactions" class="nav-link">Transações</NuxtLink>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Transações
+                            </a>
+                            <ul class="dropdown-menu shadow border-0 animate__animated animate__fadeInUp"
+                                aria-labelledby="navbarDropdown">
+                                <li>
+                                    <NuxtLink to="/transactions/add" class="dropdown-item">Adicionar</NuxtLink>
+                                </li>
+                                <li>
+                                    <NuxtLink to="/transactions/my-transactions" class="dropdown-item">
+                                        Minhas Transações
+                                    </NuxtLink>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+
                     </div>
                 </div>
                 <div>

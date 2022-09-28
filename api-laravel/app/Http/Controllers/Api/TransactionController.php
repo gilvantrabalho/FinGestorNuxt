@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class TransactionController extends Controller
@@ -77,7 +78,7 @@ class TransactionController extends Controller
         return response()->json([
             'error' => false,
             'response' => [
-                'transactions' => Transaction::whereUserId($user_id)->get()
+                'transactions' => Transaction::whereUserId($user_id)->where('created_at', 'like', date('Y-m-d') . '%')->get()
             ]
         ]);
     }
@@ -98,7 +99,7 @@ class TransactionController extends Controller
     {
         try {
             if ($id) {
-                $delete = Transaction::whereId($id)->delete();  
+                $delete = Transaction::whereId($id)->delete();
                 if ($delete) {
                     return response()->json([
                         'error' => false,
@@ -108,7 +109,7 @@ class TransactionController extends Controller
                     ]);
                 }
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
