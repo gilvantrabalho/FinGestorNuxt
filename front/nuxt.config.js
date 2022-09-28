@@ -45,7 +45,7 @@ export default {
   ],
 
   axios: {
-    baseURL: 'http://192.168.15.5:8000/api'
+    baseURL: 'http://192.168.15.8:8000/api'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -53,7 +53,7 @@ export default {
   },
 
   server: {
-    host: '192.168.15.5',
+    host: '192.168.15.8',
     port: '3000' // optional
   },
 

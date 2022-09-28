@@ -38,12 +38,12 @@ Route::controller(TransactionController::class)->prefix('transaction')->group(fu
     Route::delete('delete/{id}', 'destroy');
 });
 
-Route::prefix('dashboard')->group(function() {
+Route::prefix('dashboard')->group(function () {
 
     Route::controller(TransactionDashboardController::class)
-        ->prefix('transaction')->group(function() {
-        Route::get('sum-cards/{user_id}', 'sumCards');
-        Route::get('e-sum-by-day/{user_id}', 'eSumByDay');
-    });
-
+        ->prefix('transaction')->group(function () {
+            Route::get('sum-cards/{user_id}', 'sumCards');
+            Route::get('e-sum-by-day/{user_id}', 'eSumByDay');
+            Route::get('get-graphic-data-by-type', 'graphicDataByType');
+        });
 });

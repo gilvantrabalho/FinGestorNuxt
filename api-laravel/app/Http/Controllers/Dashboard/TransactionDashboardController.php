@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\TransactionRepository;
-use Illuminate\Http\Request;
 
 class TransactionDashboardController extends Controller
 {
@@ -20,10 +19,21 @@ class TransactionDashboardController extends Controller
         ]);
     }
 
-    public function eSumByDay(int $user_id) {
+    public function eSumByDay(int $user_id)
+    {
         return response()->json([
             'response' => [
                 'sum' => TransactionRepository::getSumByDay("E", $user_id)
+            ]
+        ]);
+    }
+
+    public function graphicDataByType()
+    {
+        return response()->json([
+            'response' => [
+                'entradas' => TransactionRepository::getGraphicDataByType("E"),
+                'saidas' => TransactionRepository::getGraphicDataByType("S")
             ]
         ]);
     }

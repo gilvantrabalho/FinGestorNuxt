@@ -1,15 +1,7 @@
 <template>
-  <LineChartGenerator
-    :chart-options="chartOptions"
-    :chart-data="chartData"
-    :chart-id="chartId"
-    :dataset-id-key="datasetIdKey"
-    :plugins="plugins"
-    :css-classes="cssClasses"
-    :styles="styles"
-    :width="width"
-    :height="height"
-  />
+  <LineChartGenerator :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId"
+    :dataset-id-key="datasetIdKey" :plugins="plugins" :css-classes="cssClasses" :styles="styles" :width="width"
+    :height="height" />
 </template>
 
 <script>
@@ -64,7 +56,7 @@ export default {
     },
     styles: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     plugins: {
       type: Array,
@@ -74,21 +66,13 @@ export default {
   data() {
     return {
       chartData: {
-        labels: [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July'
-        ],
+        labels: [],
         datasets: [
           {
-            label: 'Data One',
+            label: 'Total das Saídas',
             backgroundColor: 'red',
             borderColor: 'red',
-            data: [40, 39, 10, 40, 39, 80, 40]
+            data: []
           }
         ]
       },
@@ -96,6 +80,35 @@ export default {
         responsive: true,
         maintainAspectRatio: false
       }
+    }
+  },
+  created() {
+    this.getGraphicDataByType();
+  },
+  methods: {
+    getGraphicDataByType: function () {
+      this.$axios.get('dashboard/transaction/get-graphic-data-by-type')
+        .then(res => {
+          let data = res.data.response.saidas;
+          if (data) {
+            console.log(data)
+
+            let total = [];
+            let label;
+            let labels = [];
+
+            data.forEach(e => {
+              console.log(e.total)
+              label = `${e.day}/${e.month < 10 ? '0' + e.month : e.month}/${e.year}`;
+              labels.push(label);
+              total.push(e.total);
+            })
+            this.chartData.labels = labels;
+            this.chartData.datasets[0].data = total;
+
+          }
+        })
+        .catch(error => console.log(error))
     }
   }
 }

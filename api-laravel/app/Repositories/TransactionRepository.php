@@ -46,9 +46,23 @@ class TransactionRepository
                 ->whereType("'$type'")
                 ->groupBy("created_at")
                 ->get();
-                
         } catch (\Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    public static function getGraphicDataByType(string $type)
+    {
+        return DB::select("SELECT
+                DAY(created_at) AS day,
+                MONTH(NOW()) AS month,
+                YEAR(NOW()) AS year,
+                COUNT(*) AS count,
+                SUM(value) as total
+            FROM transactions
+                WHERE type = '{$type}' 
+                AND MONTH(created_at) = MONTH(NOW())
+                AND YEAR(created_at) = YEAR(NOW())
+                GROUP BY DAY(created_at);");
     }
 }
